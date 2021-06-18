@@ -8,14 +8,14 @@ const {
   updateProduct,
   deleteProduct,
   createProductReview,
+  getProductReviews,
+  deleteReview,
 } = require('../controllers/productController')
 
 const { isAuthenticatedUser, authorizedUser } = require('../middlewares/auth')
 
 router.route('/products').get(getProducts)
 router.route('/product/:id').get(getSingleProduct)
-
-router.route('/review').put(isAuthenticatedUser, createProductReview)
 
 router
   .route('/admin/product/new')
@@ -25,5 +25,9 @@ router
   .route('/admin/product/:id')
   .put(isAuthenticatedUser, authorizedUser('admin'), updateProduct)
   .delete(isAuthenticatedUser, authorizedUser('admin'), deleteProduct)
+
+router.route('/review').put(isAuthenticatedUser, createProductReview)
+router.route('/reviews').get(isAuthenticatedUser, getProductReviews)
+router.route('/reviews').delete(isAuthenticatedUser, deleteReview)
 
 module.exports = router
