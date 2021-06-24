@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -6,7 +7,9 @@ const Header = () => {
       <nav className='navbar row'>
         <div className='col-12 col-md-3'>
           <div className='navbar-brand'>
-            <img src='/images/logo__bigbuy.png' alt='BigBuy Logo' />
+            <Link to='/'>
+              <img src='/images/logo__bigbuy.png' alt='BigBuy Logo' />
+            </Link>
           </div>
         </div>
 
