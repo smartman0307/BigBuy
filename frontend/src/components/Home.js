@@ -7,7 +7,10 @@ import { getProducts } from '../actions/productActions'
 import Product from '../components/products/Product'
 import Loader from '../components/layouts/Loader'
 
+import { useAlert } from 'react-alert'
+
 const Home = () => {
+  const alert = useAlert()
   const dispatch = useDispatch()
 
   const { products, loading, error, productsCount } = useSelector(
@@ -15,8 +18,12 @@ const Home = () => {
   )
 
   useEffect(() => {
+    if (error) {
+      return alert.error(error)
+    }
+
     dispatch(getProducts())
-  }, [dispatch])
+  }, [dispatch, error, alert])
 
   return (
     <>
@@ -29,7 +36,9 @@ const Home = () => {
           <section id='products' className='container mt-5'>
             <div className='row'>
               {products &&
-                products.map((product) => <Product product={product} />)}
+                products.map((product) => (
+                  <Product product={product} key={product._id} />
+                ))}
             </div>
           </section>
         </>
