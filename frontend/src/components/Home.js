@@ -10,7 +10,7 @@ import Loader from '../components/layouts/Loader'
 
 import { useAlert } from 'react-alert'
 
-const Home = () => {
+const Home = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const alert = useAlert()
@@ -20,13 +20,15 @@ const Home = () => {
     (state) => state.products
   )
 
+  const keyword = match.params.keyword
+
   useEffect(() => {
     if (error) {
       return alert.error(error)
     }
 
-    dispatch(getProducts(currentPage))
-  }, [dispatch, error, alert, currentPage])
+    dispatch(getProducts(keyword, currentPage))
+  }, [dispatch, error, alert, currentPage, keyword])
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber)
