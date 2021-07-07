@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-
+const cloudinary = require('cloudinary')
 const User = require('../models/user')
 
 const ErrorHandler = require('../utils/errorHandler')
@@ -8,6 +8,12 @@ const sendToken = require('../utils/jwtToken')
 const sendEmail = require('../utils/sendEmail')
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const result = cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'avatars',
+    width: 150,
+    crop: 'scale',
+  })
+
   const { name, email, password } = req.body
 
   const user = await User.create({
@@ -15,9 +21,8 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: 'dkjsvkjsb',
-      url:
-        'https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTN8MjAxMzUyMHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      public_id: result.public_id,
+      url: result.secure_url,
     },
   })
 
