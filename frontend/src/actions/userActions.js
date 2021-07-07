@@ -3,6 +3,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  CLEAR_ERRORS,
 } from '../constants/userConstants'
 
 // Login
@@ -32,4 +33,11 @@ export const login = (email, password) => async (dispatch) => {
       payload: error.response.data.message,
     })
   }
+}
+
+//Clear Error
+export const clearErrors = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  })
 }
