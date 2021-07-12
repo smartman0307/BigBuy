@@ -6,11 +6,18 @@ import { useAlert } from 'react-alert'
 
 import Search from './Search'
 
+import { logout } from '../../actions/userActions'
+
 const Header = () => {
   const alert = useAlert()
   const dispatch = useDispatch()
 
   const { user, loading } = useSelector((state) => state.auth)
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    alert.success('Logged Out Successfully')
+  }
 
   return (
     <>
@@ -71,7 +78,10 @@ const Header = () => {
                 <Link className='dropdown-item' to='/profile'>
                   Profile
                 </Link>
-                <Link className='dropdown-item text-danger' to='/'>
+                <Link
+                  className='dropdown-item text-danger'
+                  to='/'
+                  onClick={logoutHandler}>
                   Logout
                 </Link>
               </div>
