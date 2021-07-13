@@ -10,6 +10,9 @@ import {
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 } from '../constants/userConstants'
@@ -79,6 +82,31 @@ export const register = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
+      payload: error.response.data.message,
+    })
+  }
+}
+
+// Update profile
+export const updateProfile = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PROFILE_REQUEST })
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+
+    const { data } = await axios.put('/api/v1/profile/update', userData, config)
+
+    dispatch({
+      type: UPDATE_PROFILE_SUCCESS,
+      payload: data.success,
+    })
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PROFILE_FAIL,
       payload: error.response.data.message,
     })
   }
