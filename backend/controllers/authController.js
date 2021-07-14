@@ -70,9 +70,11 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save({ validateBeforeSave: false })
 
   //create reset password url
-  const resetUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/password/reset/${resetToken}`
+
+  // ${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/v1
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`
 
   const message = `Please use this link to reset your password:\n\n ${resetUrl}\n\n if you have not requested please ignore`
 
