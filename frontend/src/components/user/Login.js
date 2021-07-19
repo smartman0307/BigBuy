@@ -21,7 +21,7 @@ const Login = ({ history, location }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/')
+      history.push(redirect)
     }
 
     if (error) {
