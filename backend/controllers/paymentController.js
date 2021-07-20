@@ -6,8 +6,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 exports.processPayment = catchAsyncErrors(async (req, res, next) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
-    currency: 'usd',
-
+    currency: 'INR',
+    description: 'BigBuy Test Payment',
     metadata: { integration_check: 'accept_a_payment' },
   })
 
