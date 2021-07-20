@@ -17,9 +17,14 @@ import ProtectedRoute from './components/route/ProtectedRoute'
 import Cart from './components/cart/Cart'
 import Shipping from './components/cart/Shipping'
 import ConfirmOrder from './components/cart/ConfirmOrder'
+import Payment from './components/cart/Payment'
 
 import { loadUser } from './actions/userActions'
 import store from './store'
+
+// Payment
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('')
@@ -56,6 +61,11 @@ function App() {
           <ProtectedRoute path='/profile' component={Profile} exact />
           <ProtectedRoute path='/shipping' component={Shipping} />
           <ProtectedRoute path='/order/confirm' component={ConfirmOrder} />
+          {stripeApiKey && (
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtectedRoute path='/payment' component={Payment} />
+            </Elements>
+          )}
           <ProtectedRoute
             path='/profile/update'
             component={UpdateProfile}
