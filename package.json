@@ -23,6 +23,7 @@
     "mongoose": "^5.12.12",
     "nodemailer": "^6.6.1",
     "react-js-pagination": "^3.0.3",
+    "stripe": "^8.163.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {

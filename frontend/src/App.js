@@ -35,7 +35,7 @@ function App() {
           <Route path='/product/:id' component={ProductDetails} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/cart' component={Cart} exact />
+          <Route path='/cart' component={Cart} />
           <Route path='/password/forgot' component={ForgotPassword} exact />
           <Route
             path='/password/reset/:token'
