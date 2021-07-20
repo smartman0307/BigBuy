@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom'
 
 import MetaData from '../layouts/MetaData'
 
+import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
 
 const Cart = ({ history }) => {
   const dispatch = useDispatch()
+  const alert = useAlert()
 
   const { cartItems } = useSelector((state) => state.cart)
 
   const removeCartItemHandler = (id) => {
     dispatch(removeItemFromCart(id))
+    alert.success('Item removed from Cart')
   }
 
   const increaseQty = (id, quantity, stock) => {
@@ -49,7 +52,7 @@ const Cart = ({ history }) => {
           <div className='row d-flex justify-content-between'>
             <div className='col-12 col-lg-8'>
               {cartItems.map((item) => (
-                <Fragment>
+                <Fragment key={item.product}>
                   <hr />
 
                   <div className='cart-item' key={item.product}>
