@@ -20,6 +20,7 @@ import ConfirmOrder from './components/cart/ConfirmOrder'
 import Payment from './components/cart/Payment'
 import OrderSuccess from './components/cart/OrderSuccess'
 import ListOrders from './components/order/ListOrders'
+import OrderDetails from './components/order/OrderDetails'
 
 import { loadUser } from './actions/userActions'
 import store from './store'
@@ -66,6 +67,7 @@ function App() {
           <ProtectedRoute path='/success' component={OrderSuccess} />
 
           <ProtectedRoute path='/orders/me' component={ListOrders} exact />
+          <ProtectedRoute path='/order/:id' component={OrderDetails} />
 
           {stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
