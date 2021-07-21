@@ -12,6 +12,8 @@ import { addItemToCart } from '../../actions/cartActions'
 
 import Loader from '../layouts/Loader'
 import MetaData from '../layouts/MetaData'
+import ListReviews from '../review/ListReviews'
+
 import { NEW_REVIEW_RESET } from '../../constants/productConstants'
 
 const ProductDetails = ({ match }) => {
@@ -287,6 +289,9 @@ const ProductDetails = ({ match }) => {
               </div>
             </div>
           </div>
+          {product.reviews && product.reviews.length > 0 && (
+            <ListReviews reviews={product.reviews} />
+          )}
         </>
       )}
     </>
