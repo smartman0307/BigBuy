@@ -36,6 +36,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 import Dashboard from './components/admin/Dashboard'
+import ProductsList from './components/admin/ProductsList'
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('')
@@ -97,6 +98,11 @@ function App() {
           path='/dashboard'
           isAdmin={true}
           component={Dashboard}
+        />
+        <ProtectedRoute
+          path='/admin/products'
+          isAdmin={true}
+          component={ProductsList}
         />
 
         <Footer />
