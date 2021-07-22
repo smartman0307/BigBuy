@@ -41,6 +41,7 @@ import NewProduct from './components/admin/NewProduct'
 import UpdateProduct from './components/admin/UpdateProduct'
 
 import OrdersList from './components/admin/OrdersList'
+import ProcessOrder from './components/admin/ProcessOrder'
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('')
@@ -124,6 +125,12 @@ function App() {
           path='/admin/orders'
           isAdmin={true}
           component={OrdersList}
+          exact
+        />
+        <ProtectedRoute
+          path='/admin/order/:id'
+          isAdmin={true}
+          component={ProcessOrder}
           exact
         />
 
